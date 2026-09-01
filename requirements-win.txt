@@ -1,0 +1,63 @@
+# 딥러닝의 정석 with 파이토치 - 실습 환경 (Windows 11 / Python 3.10 / RTX 50xx)
+#
+# 원본 requirements.txt (macOS Apple Silicon / Python 3.12) 를 Windows 용으로 조정한 파일입니다.
+#
+# [변경점]
+#  1) Python 3.10 사용 (3.12 미설치, 3.14 는 numpy 1.26.4 / tensorflow 2.16 wheel 없음)
+#  2) torch / torchvision / torchaudio 는 여기서 제외 -> CUDA 12.8 인덱스에서 별도 설치.
+#     PyPI 기본 wheel 은 Windows 에서 CPU 전용이고, RTX 50xx(Blackwell, sm_120) 는
+#     cu128 이상 빌드가 필요합니다:
+#       pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
+#  3) tensorflow==2.16.2 는 Windows 에서 tensorflow-intel(CPU 전용) 로 설치됩니다. (비교 예제용이므로 무방)
+#
+# numpy 는 1.x 로 고정합니다.
+#   - gym 0.26.2 가 np.bool8 을 사용 (numpy 2.0 에서 제거됨)
+#   - tensorflow 2.16.x 가 numpy<2 를 요구
+numpy==1.26.4
+
+# --- 핵심 프레임워크 ---
+# torch, torchvision, torchaudio 는 위 [변경점] 2) 참고 (cu128 인덱스에서 설치)
+torchsummary
+
+# --- 데이터 / 시각화 ---
+matplotlib
+seaborn
+pandas
+scikit-learn
+scikit-optimize
+yfinance
+
+# --- 영상 처리 (8장, 5장) ---
+pillow
+opencv-python
+
+# --- 오디오 처리 (10장) ---
+librosa
+soundfile
+
+# --- 사전 학습 모델 (7장, 9장, 11장) ---
+transformers
+timm
+
+# --- 모델 배포 / 최적화 (12장) ---
+# onnx 1.18+ 는 ml_dtypes>=0.5 를 요구하는데,
+# tensorflow 2.16.2 가 ml_dtypes~=0.3.1 로 고정하므로 충돌합니다.
+# onnx 1.17.0 은 ml_dtypes 에 의존하지 않아 두 패키지가 공존 가능합니다.
+onnx==1.17.0
+onnxruntime
+
+# --- 강화학습 (11장, CartPole-v1) ---
+# 노트북이 구(舊) Gym API 를 사용합니다:
+#   state = env.reset()                       -> 배열 반환 (0.26+ 는 튜플)
+#   next_state, reward, done, _ = env.step(a) -> 4-튜플 (0.26+ 는 5-튜플)
+# 0.25.2 가 이 API 의 마지막 버전이므로 고정합니다.
+gym==0.25.2
+pygame
+
+# --- 비교 예제용 (1장, 2장) ---
+tensorflow==2.16.2
+
+# --- 노트북 실행 환경 ---
+jupyterlab
+ipykernel
+ipywidgets
