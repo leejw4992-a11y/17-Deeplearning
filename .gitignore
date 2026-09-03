@@ -20,3 +20,19 @@ __pycache__/
 .idea/
 .DS_Store
 Thumbs.db
+
+# .gitignore에 추가
+helmet/
+helmet.zip
+data/
+*.pt
+*.pth
+venv/
+__pycache__/
+
+helmet/
+helmet.zip
+data/
+*.pt
+*.pth
+venv/
