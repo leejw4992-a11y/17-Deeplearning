@@ -36,3 +36,4 @@ data/
 *.pt
 *.pth
 venv/
+chest_xray/
