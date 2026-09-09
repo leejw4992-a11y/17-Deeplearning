@@ -37,3 +37,4 @@ data/
 *.pth
 venv/
 chest_xray/
+cityscapes/
