@@ -38,3 +38,6 @@ data/
 venv/
 chest_xray/
 cityscapes/
+
+.jpg
+.png
